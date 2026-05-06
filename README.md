@@ -23,7 +23,9 @@
 - AI Integration
 
 ## Connect With Me
-- GitHub: https://github.com/yourusername
-- LinkedIn: https://linkedin.com/in/yourprofile
+- GitHub: https://github.com/Kaviyasree-N
+- LinkedIn: www.linkedin.com/in/
+kaviya-sree-n-a6293b380
+
 
 ___Always learning and building new things___
