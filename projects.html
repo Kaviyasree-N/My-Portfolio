@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Kaviya Sree N</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="grid-bg">
+
+<header class="nav">
+  <div class="wrap">
+    <a class="nav-mark" href="index.html">KAVIYA<span>_</span>SREE.N</a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="projects.html" class="active">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="frame ticks">
+      <span class="tick-tr"></span><span class="tick-br"></span>
+      <div class="eyebrow">Sec. Projects</div>
+      <h1>What I've built.</h1>
+      <p class="lede">An exploded, layer-by-layer look at a real full-stack system, plus what's currently in progress.</p>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+
+    <div class="project-block">
+      <div class="project-head">
+        <h3>Event ERP System</h3>
+        <div class="project-stack-tags"><span>React.js</span>·<span>Django</span>·<span>PostgreSQL</span></div>
+      </div>
+      <p class="project-desc">A full-stack enterprise resource planning platform built to streamline event management workflows — a dynamic React.js frontend wired to a Django REST backend, sitting on a PostgreSQL data layer. Hover a layer below to see what it's responsible for.</p>
+
+      <div class="stack-diagram ticks">
+        <span class="tick-tr"></span><span class="tick-br"></span>
+        <div class="stack-layer">
+          <div>
+            <div class="l-name">React.js Frontend</div>
+            <div class="l-role">Responsive UI, translated directly from Figma handoff</div>
+          </div>
+          <span class="l-tag">Presentation</span>
+        </div>
+        <div class="stack-layer">
+          <div>
+            <div class="l-name">Django REST Backend</div>
+            <div class="l-role">Feature logic and API endpoints, built in an agile sprint cycle</div>
+          </div>
+          <span class="l-tag">Application</span>
+        </div>
+        <div class="stack-layer">
+          <div>
+            <div class="l-name">PostgreSQL</div>
+            <div class="l-role">Persistent, relational store for events, users, and workflows</div>
+          </div>
+          <span class="l-tag">Data</span>
+        </div>
+      </div>
+      <div class="project-note">Fig. 1 — exploded view, full-stack architecture</div>
+    </div>
+
+    <div class="project-block">
+      <div class="project-head">
+        <h3>Personal Portfolio Website <span class="status-tag">In progress</span></h3>
+        <div class="project-stack-tags"><span>React.js</span>·<span>HTML</span>·<span>CSS</span></div>
+      </div>
+      <p class="project-desc">A responsive personal site to showcase projects, skills, and open-source contributions, built on a modern React.js architecture — the next iteration of the site you're on right now.</p>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Kaviya Sree N — Chennai, Tamil Nadu</span>
+    <span><a href="contact.html">Get in touch →</a></span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
