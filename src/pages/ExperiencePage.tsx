@@ -5,7 +5,6 @@
 
 import React from 'react';
 import {
-  Briefcase,
   GitPullRequest,
   Users,
   Calendar,
@@ -19,9 +18,8 @@ export const ExperiencePage: React.FC = () => {
   const { experiences } = PORTFOLIO_DATA;
 
   const typeIcons: Record<string, React.ElementType> = {
-    Internship: Briefcase,
-    Community: Users,
     'Open Source': GitPullRequest,
+    Community: Users,
   };
 
   return (
@@ -38,14 +36,14 @@ export const ExperiencePage: React.FC = () => {
             Experience &amp; Community
           </h1>
           <p className="text-base text-slate-300 mt-2 max-w-2xl leading-relaxed">
-            Product development internships, student-led technical community initiatives, and open-source contributions.
+            Open-source software contributions and student-driven technical community coordination demonstrating collaboration and developer practices.
           </p>
         </header>
 
         {/* Timeline List */}
         <div className="space-y-10">
           {experiences.map((exp, index) => {
-            const Icon = typeIcons[exp.type] || Briefcase;
+            const Icon = typeIcons[exp.type] || GitPullRequest;
             return (
               <div
                 key={index}
@@ -83,7 +81,7 @@ export const ExperiencePage: React.FC = () => {
 
                   {/* Collaboration Context Callout */}
                   {exp.collaborationNotice && (
-                    <div className="my-3 py-2.5 px-3.5 rounded-lg bg-blue-950/30 border border-blue-900/40 text-xs text-blue-300/90 leading-relaxed">
+                    <div className="my-3 py-2 px-3.5 rounded-lg bg-blue-950/30 border border-blue-900/40 text-xs text-blue-300/90 leading-relaxed">
                       <strong>Context:</strong> {exp.collaborationNotice}
                     </div>
                   )}

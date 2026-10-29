@@ -45,7 +45,7 @@ export const ProjectDetailPage: React.FC = () => {
         <Breadcrumbs
           items={[
             { label: 'Projects', href: '/projects' },
-            { label: project.title },
+            { label: project.shortTitle || project.title },
           ]}
         />
 
@@ -146,22 +146,48 @@ export const ProjectDetailPage: React.FC = () => {
             </p>
           </section>
 
-          {/* Technologies */}
-          <section className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 space-y-3">
+          {/* Technologies Section: Grouped if techGroups exist, or badge list */}
+          <section className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 space-y-4">
             <h2 className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-white">
               <Layers size={16} className="text-blue-400" />
-              <span>Technologies &amp; Tools</span>
+              <span>Technologies &amp; Architecture</span>
             </h2>
-            <div className="flex flex-wrap gap-2 pt-1">
-              {project.technologies.map((tech) => (
-                <span
-                  key={tech}
-                  className="px-3 py-1.5 text-xs font-mono rounded-lg bg-slate-950/80 border border-slate-800 text-slate-200"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
+
+            {project.techGroups ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 pt-2">
+                {project.techGroups.map((tg) => (
+                  <div
+                    key={tg.group}
+                    className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80"
+                  >
+                    <span className="text-xs font-semibold text-blue-400 uppercase tracking-wider block mb-1.5">
+                      {tg.group}
+                    </span>
+                    <div className="flex flex-wrap gap-1.5">
+                      {tg.items.map((item) => (
+                        <span
+                          key={item}
+                          className="px-2 py-0.5 text-xs font-mono rounded bg-slate-800/80 text-slate-200"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="flex flex-wrap gap-2 pt-1">
+                {project.technologies.map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-3 py-1.5 text-xs font-mono rounded-lg bg-slate-950/80 border border-slate-800 text-slate-200"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            )}
           </section>
         </div>
 
@@ -179,7 +205,7 @@ export const ProjectDetailPage: React.FC = () => {
             to="/contact"
             className="inline-flex items-center gap-2 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-lg transition-colors shadow-sm shadow-blue-500/20"
           >
-            <span>Contact Me</span>
+            <span>Connect &amp; Inquire</span>
           </Link>
         </div>
       </div>

@@ -2,7 +2,7 @@
 
 A modern, minimal, professional developer portfolio for **Kaviya Sree N**, Computer Science Engineering Student at **Chennai Institute of Technology** (Class of 2029).
 
-Built as a genuine **Multi-Page Application (MPA)** using **React Router**, **TypeScript**, **Tailwind CSS**, and **Lucide Icons** with responsive layouts, accessible navigation, and deep-dive case studies.
+Built as a genuine **Multi-Page Application (MPA)** using **React Router**, **TypeScript**, **Tailwind CSS**, and **Lucide Icons** with responsive layouts, accessible navigation, and deep-dive project case studies.
 
 ---
 
@@ -10,45 +10,23 @@ Built as a genuine **Multi-Page Application (MPA)** using **React Router**, **Ty
 
 | Route | Page | Purpose |
 | :--- | :--- | :--- |
-| `/` | **Home** | Concise hero, factual highlights, featured projects teaser, core skills preview, experience snapshot, and CTA |
+| `/` | **Home** | Concise hero, factual highlights, and dedicated **Education** section (CIT & Chennai Girls HSS) |
 | `/about` | **About Me** | Dedicated academic background at Chennai Institute of Technology, focus areas, coursework, and learning philosophy |
-| `/skills` | **Skills & Technologies** | Structured categorization, proficiency indicators (Foundational vs. Introductory), and interactive filter tabs |
-| `/projects` | **Projects** | Complete project grid with problem statements, solutions, personal contributions, tech tags, and filters |
-| `/projects/:id` | **Project Case Study** | Dedicated deep-dive page for individual projects (e.g. `/projects/reflow-access`, `/projects/haulai`) |
-| `/experience` | **Experience & Community** | Structured timeline detailing CITBIF internship, GSX Chennai Chapter, and GSSoC 2026 open-source work |
-| `/achievements` | **Achievements & Certifications** | Verified certifications (Oracle, NPTEL, Cisco), coding profiles (GitHub, LeetCode, CodeChef, LinkedIn) |
-| `/contact` | **Contact** | Direct email, copy-to-clipboard, social links, and genuine validated contact form with email client dispatch |
+| `/skills` | **Skills & Technologies** | Vertically stacked sections for Programming (C++, Java, Python), Web Dev, Backend & DB, Tools, and AI/Data |
+| `/projects` | **Projects** | 4 verified projects: PhishGuard, HaulAI, CITEVENT, and Internship Recommendation System |
+| `/projects/:id` | **Project Case Study** | Dedicated deep-dive page for individual projects with grouped tech stacks |
+| `/experience` | **Experience & Community** | 1. GirlScript Summer of Code (GSSoC 2026) <br/> 2. GSX Chennai Chapter (2026 onwards) |
+| `/achievements` | **Achievements & Certifications** | Exactly 2 sections: **Certifications** (OCI, DCA, Typewriting, NPTEL, Cisco Python) & **Competitions & Recognition** |
+| `/contact` | **Connect & Contact** | 3 sections: Connect with Me (LinkedIn, GitHub, Email), Coding Profiles & Practice (LeetCode, CodeChef), and Send a Message |
 
 ---
 
 ## 🛠️ Central Configuration: `src/config/portfolioData.ts`
 
-All personal data, links, descriptions, and credentials reside in **`src/config/portfolioData.ts`**. You do not need to edit JSX or CSS when updating your details!
+All personal data, links, descriptions, and credentials reside in **`src/config/portfolioData.ts`**.
 
-### 📋 Items Awaiting Your Future Input / Verification:
+### 📸 Profile Photo:
+Update `profile.avatarImage` (line 89) in `src/config/portfolioData.ts` to point to your photograph.
 
-1. **Resume File**:
-   - `profile.resumeUrl`: Point to your public PDF link (e.g. Google Drive link or file in `/public/`).
-2. **Project 4 (Machine Learning Exploration)**:
-   - `projects[3].title`: Update with your exact project title.
-   - `projects[3].shortDescription` & `problemStatement`: Update with the actual problem and dataset examined.
-   - `projects[3].githubUrl`: Add your verified GitHub repository URL when public.
-3. **Coding Profile Statistics & Handles**:
-   - `codingProfiles`: Update with your exact LeetCode and CodeChef problem counts and profile URLs.
-4. **Custom Photograph**:
-   - The profile picture defaults to `/src/assets/images/avatar_student_developer_1793251843982.jpg`. You can drop your personal photograph into `/src/assets/images/` and change `profile.avatarImage` in `src/config/portfolioData.ts`.
-
----
-
-## 🚀 Development & Build
-
-```bash
-# Run locally on http://localhost:3000
-npm run dev
-
-# Typecheck and lint
-npm run lint
-
-# Build for production (output to dist/)
-npm run build
-```
+### 📄 Resume PDF:
+Update `profile.resumeUrl` (line 93) in `src/config/portfolioData.ts` with your public Google Drive URL or local PDF file.

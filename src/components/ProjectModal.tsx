@@ -104,16 +104,31 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               <Layers size={15} className="text-blue-400" />
               Technologies
             </h4>
-            <div className="flex flex-wrap gap-2">
-              {project.technologies.map((tech) => (
-                <span
-                  key={tech}
-                  className="px-2.5 py-1 text-xs rounded-md bg-slate-800/80 border border-slate-700/60 text-slate-200 font-mono"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
+            {project.techGroups ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                {project.techGroups.map((tg) => (
+                  <div key={tg.group} className="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800 text-xs">
+                    <span className="text-[11px] font-semibold text-blue-400 uppercase tracking-wider block mb-1">
+                      {tg.group}
+                    </span>
+                    <span className="text-slate-300 font-mono text-[11px]">
+                      {tg.items.join(' · ')}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="flex flex-wrap gap-2">
+                {project.technologies.map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-2.5 py-1 text-xs rounded-md bg-slate-800/80 border border-slate-700/60 text-slate-200 font-mono"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 

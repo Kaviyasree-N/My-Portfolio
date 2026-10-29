@@ -4,7 +4,7 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { X, Download, Printer, Copy, Check, FileText, Mail, MapPin, Building2, ExternalLink } from 'lucide-react';
+import { X, Printer, Copy, Check, FileText, Mail, MapPin, Building2 } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../config/portfolioData';
 
 interface ResumeModalProps {
@@ -14,7 +14,7 @@ interface ResumeModalProps {
 
 export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => {
   const [copied, setCopied] = useState(false);
-  const { profile, skillCategories, experiences, projects, achievements } = PORTFOLIO_DATA;
+  const { profile, experiences, projects, certifications, competitions, education } = PORTFOLIO_DATA;
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -47,30 +47,38 @@ PROFESSIONAL SUMMARY
 ${profile.introduction}
 
 EDUCATION
-Bachelor of Engineering - Computer Science and Engineering
-${profile.institution} (2025 - 2029)
+1. Bachelor of Engineering - Computer Science and Engineering
+   ${education[0]?.institution} (${education[0]?.grade})
+2. ${education[1]?.institution}
+   ${education[1]?.grade} - ${education[1]?.recognition}
 
 TECHNICAL SKILLS
-- Programming: C++, Python
+- Programming: C++ (Foundational), Java (Foundational), Python (Introductory)
 - Web: HTML5, CSS3, JavaScript, React (introductory)
 - Backend & DB: Django, PostgreSQL, Node.js
 - Tools: Git, GitHub, VS Code, Figma, Jira
+- Machine Learning & Data: Logistic Regression, Naive Bayes, Pandas, NumPy, Scikit-learn
 
-KEY EXPERIENCE
-1. Product Development Intern - CITBIF Internship Program (2026)
-2. Core Team Member - GSX Chennai Chapter (2025 - Present)
-3. Open Source Contributor - GirlScript Summer of Code 2026 (2 Merged PRs)
+KEY EXPERIENCE & INVOLVEMENTS
+1. ${experiences[0]?.role} - ${experiences[0]?.organization} (${experiences[0]?.period})
+2. ${experiences[1]?.role} - ${experiences[1]?.organization} (${experiences[1]?.period})
 
-FEATURED PROJECTS
-- ReFlow Access (Data-Driven Menstrual Health Systems)
-- HaulAI (AI-Powered Freight Coordination - Hackathon)
-- CITEVENT ERP (Event and Workflow Management)
-- Applied Machine Learning & Predictive Modeling
+PROJECTS
+- PhishGuard: Real-Time Phishing URL and Spam Email Detection System
+- HaulAI: Your AI Freight & Transport Coordinator
+- CITEVENT: College Event Management System
+- Internship Recommendation System (Java Desktop Application)
 
-CERTIFICATIONS
-- Oracle AI Foundations Associate
+CERTIFICATIONS & HONORS
+- OCI Foundations Associate — Oracle
+- OCI AI Foundations Associate — Oracle
+- Diploma in Computer Applications (DCA) — CSC Computer Software College
+- English Typewriting — Distinction
 - NPTEL Internet of Things (Elite + Silver)
-- Python Essentials 1 & 2 (Python Institute)
+- Python Essentials 1 & 2 (Python Institute & Cisco)
+- First Prize: Data Detox (TEXUS, SRM Ramapuram)
+- ReFlow Hackathon: Pre-Finale Selection (IIT Bhubaneswar)
+- School Topper: Class XII, 2025
     `.trim();
 
     navigator.clipboard.writeText(resumeText);
@@ -174,18 +182,24 @@ CERTIFICATIONS
             <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
               Education
             </h3>
-            <div className="bg-slate-900/30 p-3.5 rounded-lg border border-slate-800/60">
-              <div className="flex justify-between items-start">
-                <div>
-                  <h4 className="text-sm font-semibold text-white">
-                    Bachelor of Engineering in Computer Science and Engineering
-                  </h4>
-                  <p className="text-xs text-slate-300">
-                    {profile.institution} · Chennai, Tamil Nadu
-                  </p>
+            <div className="space-y-2">
+              {education.map((edu, idx) => (
+                <div key={idx} className="bg-slate-900/30 p-3 rounded-lg border border-slate-800/60">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h4 className="text-sm font-semibold text-white">
+                        {edu.degree} — {edu.institution}
+                      </h4>
+                      <p className="text-xs text-blue-300 font-mono mt-0.5">
+                        {edu.grade} {edu.recognition && `· ${edu.recognition}`}
+                      </p>
+                    </div>
+                    {edu.period && (
+                      <span className="text-xs font-mono text-slate-400">{edu.period}</span>
+                    )}
+                  </div>
                 </div>
-                <span className="text-xs font-mono text-blue-400">2025 – 2029</span>
-              </div>
+              ))}
             </div>
           </div>
 
@@ -197,7 +211,7 @@ CERTIFICATIONS
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
               <div className="p-2.5 rounded bg-slate-900/30 border border-slate-800/60">
                 <strong className="text-slate-200 block mb-1">Programming:</strong>
-                <span className="text-slate-400">C++ (Data Structures, Problem Solving), Python (Scripting, Foundations)</span>
+                <span className="text-slate-400">C++ (Foundational), Java (Foundational), Python (Introductory Exposure)</span>
               </div>
               <div className="p-2.5 rounded bg-slate-900/30 border border-slate-800/60">
                 <strong className="text-slate-200 block mb-1">Web Development:</strong>
@@ -205,11 +219,11 @@ CERTIFICATIONS
               </div>
               <div className="p-2.5 rounded bg-slate-900/30 border border-slate-800/60">
                 <strong className="text-slate-200 block mb-1">Backend &amp; Databases:</strong>
-                <span className="text-slate-400">Django (introductory), PostgreSQL (relational schemas), Node.js (project-based)</span>
+                <span className="text-slate-400">Django, PostgreSQL, Node.js</span>
               </div>
               <div className="p-2.5 rounded bg-slate-900/30 border border-slate-800/60">
-                <strong className="text-slate-200 block mb-1">Tools &amp; Concepts:</strong>
-                <span className="text-slate-400">Git, GitHub, VS Code, Figma, Jira, Machine Learning fundamentals</span>
+                <strong className="text-slate-200 block mb-1">Machine Learning &amp; Tools:</strong>
+                <span className="text-slate-400">Logistic Regression, Naive Bayes, Pandas, NumPy, Scikit-learn, Git, GitHub, VS Code</span>
               </div>
             </div>
           </div>
@@ -226,8 +240,7 @@ CERTIFICATIONS
                     <span className="font-semibold text-white">{exp.role} — {exp.organization}</span>
                     <span className="font-mono text-slate-400">{exp.period}</span>
                   </div>
-                  <p className="text-slate-400 leading-relaxed mb-1.5">{exp.bulletPoints[0]}</p>
-                  <p className="text-slate-400 leading-relaxed">{exp.bulletPoints[1]}</p>
+                  <p className="text-slate-400 leading-relaxed">{exp.bulletPoints[0]}</p>
                 </div>
               ))}
             </div>
@@ -239,7 +252,7 @@ CERTIFICATIONS
               Key Projects
             </h3>
             <div className="space-y-2 text-xs">
-              {projects.slice(0, 3).map((proj) => (
+              {projects.map((proj) => (
                 <div key={proj.id} className="p-2.5 rounded bg-slate-900/30 border border-slate-800/60">
                   <span className="font-semibold text-slate-200">{proj.title}</span>
                   <span className="text-slate-400"> ({proj.category}): </span>
@@ -249,16 +262,22 @@ CERTIFICATIONS
             </div>
           </div>
 
-          {/* Certifications */}
+          {/* Certifications & Recognition */}
           <div>
             <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
-              Certifications &amp; Milestones
+              Certifications &amp; Recognition
             </h3>
             <ul className="text-xs space-y-1 text-slate-300 list-disc list-inside">
-              <li>Oracle AI Foundations Associate Certification</li>
-              <li>NPTEL Internet of Things (Elite + Silver)</li>
-              <li>Python Essentials 1 &amp; 2 (Python Institute &amp; Cisco)</li>
-              <li>GirlScript Summer of Code 2026: 2 Merged Pull Requests</li>
+              {certifications.map((cert) => (
+                <li key={cert.title}>
+                  <span className="text-slate-200">{cert.title}</span> — {cert.issuer}
+                </li>
+              ))}
+              {competitions.map((comp) => (
+                <li key={comp.title}>
+                  <span className="text-slate-200">{comp.title}</span> ({comp.eventOrContext}) — {comp.recognition}
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -269,7 +288,7 @@ CERTIFICATIONS
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-colors"
+            className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-colors cursor-pointer"
           >
             Close Preview
           </button>

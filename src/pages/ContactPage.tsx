@@ -12,16 +12,17 @@ import {
   Copy,
   Check,
   AlertCircle,
+  ExternalLink,
+  Code,
+  Terminal,
   MessageSquare,
-  MapPin,
-  Clock,
   Sparkles,
 } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../config/portfolioData';
 import { Breadcrumbs } from '../components/layout/Breadcrumbs';
 
 export const ContactPage: React.FC = () => {
-  const { profile, codingProfiles } = PORTFOLIO_DATA;
+  const { profile, socialProfiles, codingPractice } = PORTFOLIO_DATA;
 
   const [formData, setFormData] = useState({
     name: '',
@@ -61,7 +62,7 @@ export const ContactPage: React.FC = () => {
     }
     setFormErrors({});
 
-    // Build real mailto link
+    // Launch default email client
     const mailtoSubject = encodeURIComponent(`[Portfolio Inquiry] ${formData.subject}`);
     const mailtoBody = encodeURIComponent(
       `Hello Kaviya,\n\n${formData.message}\n\nBest regards,\n${formData.name}\n${formData.email}`
@@ -91,249 +92,313 @@ export const ContactPage: React.FC = () => {
     setTimeout(() => setCopiedEmail(false), 2500);
   };
 
-  const linkedinProfile = codingProfiles.find((p) => p.platform === 'LinkedIn');
-  const githubProfile = codingProfiles.find((p) => p.platform === 'GitHub');
-
   return (
     <div className="py-12 md:py-20">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Breadcrumbs items={[{ label: 'Contact' }]} />
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Breadcrumbs items={[{ label: 'Connect & Contact' }]} />
 
         {/* Page Header */}
-        <header className="mb-12 pb-8 border-b border-slate-800">
+        <header className="mb-12 pb-6 border-b border-slate-800">
           <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-wide text-blue-400 uppercase mb-2">
-            <span>Direct Outreach</span>
+            <span>Get in Touch</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-3">
-            Have a project or opportunity in mind?
+            Connect &amp; Contact
           </h1>
           <p className="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed">
-            I&apos;m open to internship opportunities, collaborative projects, hackathons, and conversations about technology.
+            I am open to internship opportunities, collaborative projects, hackathons, and conversations about software engineering.
           </p>
         </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-          {/* Left Column: Direct Contact Info & Channels */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="p-6 sm:p-7 rounded-2xl bg-slate-900/40 border border-slate-800 space-y-6">
-              <div>
-                <h2 className="text-base font-bold text-white mb-2">
-                  Contact Information
-                </h2>
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                  I typically respond to internship inquiries, hackathon invites, and technical correspondence within 24 to 48 hours.
-                </p>
-              </div>
+        {/* =========================================================================
+            SECTION 1: CONNECT WITH ME
+            ========================================================================= */}
+        <section className="mb-16" aria-labelledby="section-connect">
+          <h2 id="section-connect" className="text-xl font-bold text-white mb-2">
+            Connect with Me
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-400 mb-6">
+            Find me on professional networks, explore my code repositories, or send an email.
+          </p>
 
-              {/* Primary Email Card */}
-              <div className="p-4 rounded-xl bg-slate-950/70 border border-slate-800 flex items-center justify-between gap-3">
-                <div className="flex items-center gap-3 truncate">
-                  <div className="p-2.5 rounded-lg bg-blue-600/10 text-blue-400 shrink-0">
-                    <Mail size={18} />
-                  </div>
-                  <div className="truncate">
-                    <span className="block text-[11px] text-slate-400">Direct Email</span>
-                    <a
-                      href={`mailto:${profile.email}`}
-                      className="text-xs sm:text-sm font-mono text-slate-200 hover:text-blue-400 transition-colors truncate block"
-                    >
-                      {profile.email}
-                    </a>
-                  </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {/* LinkedIn */}
+            <a
+              href="https://www.linkedin.com/in/kaviya-sree-n-a6293b380/"
+              target="_blank"
+              rel="noreferrer"
+              className="p-5 rounded-2xl bg-slate-900/40 border border-slate-800 hover:border-blue-500/50 hover:bg-slate-900/70 transition-all flex flex-col justify-between group"
+            >
+              <div className="flex items-center justify-between mb-3">
+                <div className="p-2.5 rounded-lg bg-blue-600/10 text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                  <Linkedin size={20} />
                 </div>
+                <ExternalLink size={15} className="text-slate-500 group-hover:text-blue-400 transition-colors" />
+              </div>
+              <div>
+                <span className="text-xs text-slate-400 block">Professional Network</span>
+                <span className="text-base font-bold text-white group-hover:text-blue-300 transition-colors">
+                  LinkedIn
+                </span>
+                <span className="text-xs font-mono text-slate-400 block mt-1 truncate">
+                  @kaviya-sree-n-a6293b380
+                </span>
+              </div>
+            </a>
 
+            {/* GitHub */}
+            <a
+              href="https://github.com/Kaviyasree-N"
+              target="_blank"
+              rel="noreferrer"
+              className="p-5 rounded-2xl bg-slate-900/40 border border-slate-800 hover:border-blue-500/50 hover:bg-slate-900/70 transition-all flex flex-col justify-between group"
+            >
+              <div className="flex items-center justify-between mb-3">
+                <div className="p-2.5 rounded-lg bg-blue-600/10 text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                  <Github size={20} />
+                </div>
+                <ExternalLink size={15} className="text-slate-500 group-hover:text-blue-400 transition-colors" />
+              </div>
+              <div>
+                <span className="text-xs text-slate-400 block">Code Repositories</span>
+                <span className="text-base font-bold text-white group-hover:text-blue-300 transition-colors">
+                  GitHub
+                </span>
+                <span className="text-xs font-mono text-slate-400 block mt-1 truncate">
+                  @Kaviyasree-N
+                </span>
+              </div>
+            </a>
+
+            {/* Direct Email */}
+            <div className="p-5 rounded-2xl bg-slate-900/40 border border-slate-800 hover:border-blue-500/50 transition-all flex flex-col justify-between">
+              <div className="flex items-center justify-between mb-3">
+                <div className="p-2.5 rounded-lg bg-blue-600/10 text-blue-400">
+                  <Mail size={20} />
+                </div>
                 <button
                   type="button"
                   onClick={handleCopyEmail}
-                  className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors shrink-0 cursor-pointer"
-                  title="Copy email to clipboard"
+                  className="p-1.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
+                  title="Copy email address"
                   aria-label="Copy email address"
                 >
-                  {copiedEmail ? <Check size={16} className="text-green-400" /> : <Copy size={16} />}
+                  {copiedEmail ? <Check size={14} className="text-green-400" /> : <Copy size={14} />}
                 </button>
               </div>
-
-              {/* Location & Timezone Details */}
-              <div className="space-y-3 pt-2 text-xs text-slate-300">
-                <div className="flex items-center gap-2.5 text-slate-400">
-                  <MapPin size={15} className="text-blue-400 shrink-0" />
-                  <span>{profile.location} (IST / UTC +5:30)</span>
-                </div>
-                <div className="flex items-center gap-2.5 text-slate-400">
-                  <Clock size={15} className="text-blue-400 shrink-0" />
-                  <span>Undergraduate Student Availability: Part-time / Summer 2026 Internships</span>
-                </div>
-              </div>
-
-              {/* Social Channels */}
-              <div className="pt-5 border-t border-slate-800/80 flex flex-col gap-3">
-                {linkedinProfile && (
-                  <a
-                    href={linkedinProfile.profileUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center justify-between p-3 rounded-lg bg-slate-950/40 border border-slate-800/80 hover:border-slate-700 text-xs text-slate-300 hover:text-white transition-colors"
-                  >
-                    <span className="flex items-center gap-2.5">
-                      <Linkedin size={16} className="text-blue-400" />
-                      <span>Connect on LinkedIn</span>
-                    </span>
-                    <span className="text-[11px] text-slate-400 font-mono">@{linkedinProfile.username}</span>
-                  </a>
-                )}
-
-                {githubProfile && (
-                  <a
-                    href={githubProfile.profileUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center justify-between p-3 rounded-lg bg-slate-950/40 border border-slate-800/80 hover:border-slate-700 text-xs text-slate-300 hover:text-white transition-colors"
-                  >
-                    <span className="flex items-center gap-2.5">
-                      <Github size={16} className="text-slate-400" />
-                      <span>View GitHub Profile</span>
-                    </span>
-                    <span className="text-[11px] text-slate-400 font-mono">@{githubProfile.username}</span>
-                  </a>
-                )}
+              <div>
+                <span className="text-xs text-slate-400 block">Direct Email</span>
+                <a
+                  href={`mailto:${profile.email}`}
+                  className="text-base font-bold text-white hover:text-blue-300 transition-colors block truncate"
+                >
+                  Email
+                </a>
+                <span className="text-xs font-mono text-slate-400 block mt-1 truncate">
+                  {profile.email}
+                </span>
               </div>
             </div>
           </div>
+        </section>
 
-          {/* Right Column: Genuine Contact Form */}
-          <div className="lg:col-span-7">
-            <form
-              onSubmit={handleSubmit}
-              noValidate
-              className="p-6 sm:p-8 rounded-2xl bg-slate-900/40 border border-slate-800 space-y-4"
-            >
-              <h2 className="text-base font-bold text-white mb-1">
-                Send a Direct Message
-              </h2>
-              <p className="text-xs text-slate-400 mb-4">
-                Fill in the details below to dispatch a message directly to my inbox via your preferred mail client.
-              </p>
+        {/* =========================================================================
+            SECTION 2: CODING PROFILES & PRACTICE
+            ========================================================================= */}
+        <section className="mb-16" aria-labelledby="section-coding">
+          <h2 id="section-coding" className="text-xl font-bold text-white mb-2">
+            Coding Profiles &amp; Practice
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-400 mb-6">
+            Ongoing competitive programming practice and algorithmic problem solving.
+          </p>
 
-              {/* Name & Email Fields */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {codingPractice.map((cp) => (
+              <a
+                key={cp.platform}
+                href={cp.profileUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 hover:border-blue-500/50 hover:bg-slate-900/70 transition-all group flex flex-col justify-between"
+              >
                 <div>
-                  <label htmlFor="contact-name" className="block text-xs font-medium text-slate-300 mb-1.5">
-                    Your Name <span className="text-blue-400">*</span>
-                  </label>
-                  <input
-                    id="contact-name"
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="e.g. Alex Morgan"
-                    className="w-full px-3.5 py-2.5 text-xs bg-slate-950 border border-slate-800 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
-                    aria-invalid={!!formErrors.name}
-                  />
-                  {formErrors.name && (
-                    <p className="text-[11px] text-red-400 mt-1 flex items-center gap-1">
-                      <AlertCircle size={12} />
-                      {formErrors.name}
-                    </p>
-                  )}
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-2.5">
+                      <div className="p-2 rounded-lg bg-blue-600/10 text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                        {cp.platform === 'LeetCode' ? <Code size={20} /> : <Terminal size={20} />}
+                      </div>
+                      <div>
+                        <h3 className="text-base font-bold text-white group-hover:text-blue-300 transition-colors">
+                          {cp.platform}
+                        </h3>
+                        <span className="text-xs font-mono text-slate-400">
+                          @{cp.username}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-mono font-semibold px-2.5 py-1 rounded bg-blue-950/80 text-blue-300 border border-blue-800/60">
+                        {cp.metricValue}
+                      </span>
+                      <ExternalLink size={15} className="text-slate-500 group-hover:text-blue-400 transition-colors" />
+                    </div>
+                  </div>
+
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mt-3">
+                    {cp.description}
+                  </p>
                 </div>
 
-                <div>
-                  <label htmlFor="contact-email" className="block text-xs font-medium text-slate-300 mb-1.5">
-                    Your Email <span className="text-blue-400">*</span>
-                  </label>
-                  <input
-                    id="contact-email"
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="e.g. alex@company.com"
-                    className="w-full px-3.5 py-2.5 text-xs bg-slate-950 border border-slate-800 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
-                    aria-invalid={!!formErrors.email}
-                  />
-                  {formErrors.email && (
-                    <p className="text-[11px] text-red-400 mt-1 flex items-center gap-1">
-                      <AlertCircle size={12} />
-                      {formErrors.email}
-                    </p>
-                  )}
+                <div className="pt-4 mt-4 border-t border-slate-800/60 flex items-center justify-between text-xs text-blue-400 font-medium">
+                  <span>View {cp.platform} Profile</span>
+                  <span aria-hidden="true">&rarr;</span>
                 </div>
-              </div>
+              </a>
+            ))}
+          </div>
+        </section>
 
-              {/* Subject Field */}
+        {/* =========================================================================
+            SECTION 3: SEND A MESSAGE
+            ========================================================================= */}
+        <section aria-labelledby="section-message">
+          <h2 id="section-message" className="text-xl font-bold text-white mb-2">
+            Send a Message
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-400 mb-6">
+            Fill in the details below to dispatch a message directly to my email address.
+          </p>
+
+          <form
+            onSubmit={handleSubmit}
+            noValidate
+            className="p-6 sm:p-8 rounded-2xl bg-slate-900/40 border border-slate-800 space-y-4 max-w-3xl"
+          >
+            {/* Name & Email Fields */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="contact-subject" className="block text-xs font-medium text-slate-300 mb-1.5">
-                  Subject <span className="text-blue-400">*</span>
+                <label htmlFor="contact-name" className="block text-xs font-medium text-slate-300 mb-1.5">
+                  Your Name <span className="text-blue-400">*</span>
                 </label>
                 <input
-                  id="contact-subject"
+                  id="contact-name"
                   type="text"
-                  value={formData.subject}
-                  onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                  placeholder="e.g. Internship Opportunity / Technical Collaboration"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  placeholder="e.g. Alex Morgan"
                   className="w-full px-3.5 py-2.5 text-xs bg-slate-950 border border-slate-800 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
-                  aria-invalid={!!formErrors.subject}
+                  aria-invalid={!!formErrors.name}
                 />
-                {formErrors.subject && (
+                {formErrors.name && (
                   <p className="text-[11px] text-red-400 mt-1 flex items-center gap-1">
                     <AlertCircle size={12} />
-                    {formErrors.subject}
+                    {formErrors.name}
                   </p>
                 )}
               </div>
 
-              {/* Message Field */}
               <div>
-                <label htmlFor="contact-message" className="block text-xs font-medium text-slate-300 mb-1.5">
-                  Message <span className="text-blue-400">*</span>
+                <label htmlFor="contact-email" className="block text-xs font-medium text-slate-300 mb-1.5">
+                  Your Email <span className="text-blue-400">*</span>
                 </label>
-                <textarea
-                  id="contact-message"
-                  rows={5}
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  placeholder="Write your inquiry or project details here..."
-                  className="w-full px-3.5 py-2.5 text-xs bg-slate-950 border border-slate-800 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors resize-y"
-                  aria-invalid={!!formErrors.message}
+                <input
+                  id="contact-email"
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  placeholder="e.g. alex@company.com"
+                  className="w-full px-3.5 py-2.5 text-xs bg-slate-950 border border-slate-800 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
+                  aria-invalid={!!formErrors.email}
                 />
-                {formErrors.message && (
+                {formErrors.email && (
                   <p className="text-[11px] text-red-400 mt-1 flex items-center gap-1">
                     <AlertCircle size={12} />
-                    {formErrors.message}
+                    {formErrors.email}
                   </p>
                 )}
               </div>
+            </div>
 
-              {/* Action Buttons */}
-              <div className="pt-2 flex flex-wrap items-center gap-3">
-                <button
-                  type="submit"
-                  className="inline-flex items-center justify-center px-5 py-2.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors gap-2 cursor-pointer shadow-sm shadow-blue-500/20"
-                >
-                  <Send size={14} />
-                  <span>Send via Email Client</span>
-                </button>
-
-                {formData.message.trim().length > 0 && (
-                  <button
-                    type="button"
-                    onClick={handleCopyDraft}
-                    className="inline-flex items-center justify-center px-4 py-2.5 text-xs font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 hover:text-white border border-slate-700 rounded-lg transition-colors gap-2 cursor-pointer"
-                  >
-                    <Copy size={14} />
-                    <span>Copy Full Draft</span>
-                  </button>
-                )}
-              </div>
-
-              {/* Honest Submission Status Feedback */}
-              {submissionFeedback.status !== 'idle' && (
-                <div className="mt-4 p-3.5 rounded-lg bg-blue-950/40 border border-blue-900/60 text-xs text-blue-200">
-                  <p className="leading-relaxed">{submissionFeedback.text}</p>
-                </div>
+            {/* Subject Field */}
+            <div>
+              <label htmlFor="contact-subject" className="block text-xs font-medium text-slate-300 mb-1.5">
+                Subject <span className="text-blue-400">*</span>
+              </label>
+              <input
+                id="contact-subject"
+                type="text"
+                value={formData.subject}
+                onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                placeholder="e.g. Internship Opportunity / Technical Project"
+                className="w-full px-3.5 py-2.5 text-xs bg-slate-950 border border-slate-800 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
+                aria-invalid={!!formErrors.subject}
+              />
+              {formErrors.subject && (
+                <p className="text-[11px] text-red-400 mt-1 flex items-center gap-1">
+                  <AlertCircle size={12} />
+                  {formErrors.subject}
+                </p>
               )}
-            </form>
-          </div>
-        </div>
+            </div>
+
+            {/* Message Field */}
+            <div>
+              <label htmlFor="contact-message" className="block text-xs font-medium text-slate-300 mb-1.5">
+                Message <span className="text-blue-400">*</span>
+              </label>
+              <textarea
+                id="contact-message"
+                rows={5}
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                placeholder="Write your note or project description here..."
+                className="w-full px-3.5 py-2.5 text-xs bg-slate-950 border border-slate-800 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors resize-y"
+                aria-invalid={!!formErrors.message}
+              />
+              {formErrors.message && (
+                <p className="text-[11px] text-red-400 mt-1 flex items-center gap-1">
+                  <AlertCircle size={12} />
+                  {formErrors.message}
+                </p>
+              )}
+            </div>
+
+            {/* Action Buttons */}
+            <div className="pt-2 flex flex-wrap items-center gap-3">
+              <button
+                type="submit"
+                className="inline-flex items-center justify-center px-5 py-2.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors gap-2 cursor-pointer shadow-sm shadow-blue-500/20"
+              >
+                <Send size={14} />
+                <span>Send via Email Client</span>
+              </button>
+
+              {formData.message.trim().length > 0 && (
+                <button
+                  type="button"
+                  onClick={handleCopyDraft}
+                  className="inline-flex items-center justify-center px-4 py-2.5 text-xs font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 hover:text-white border border-slate-700 rounded-lg transition-colors gap-2 cursor-pointer"
+                >
+                  <Copy size={14} />
+                  <span>Copy Full Draft</span>
+                </button>
+              )}
+            </div>
+
+            {/* Honest Feedback Note */}
+            {submissionFeedback.status !== 'idle' ? (
+              <div className="mt-4 p-3.5 rounded-lg bg-blue-950/40 border border-blue-900/60 text-xs text-blue-200">
+                <p className="leading-relaxed">{submissionFeedback.text}</p>
+              </div>
+            ) : (
+              <p className="text-[11px] text-slate-500 pt-1">
+                Note: This form opens your default email client with a pre-filled message draft to guarantee direct, reliable message delivery without third-party email routing.
+              </p>
+            )}
+          </form>
+        </section>
       </div>
     </div>
   );

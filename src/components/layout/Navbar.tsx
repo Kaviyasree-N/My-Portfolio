@@ -18,12 +18,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
 
   const navLinks = [
     { label: 'Home', path: '/' },
-    { label: 'About', path: '/about' },
     { label: 'Skills', path: '/skills' },
     { label: 'Projects', path: '/projects' },
     { label: 'Experience', path: '/experience' },
     { label: 'Achievements', path: '/achievements' },
-    { label: 'Contact', path: '/contact' },
+    { label: 'Connect & Contact', path: '/contact' },
   ];
 
   return (

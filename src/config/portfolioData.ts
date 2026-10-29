@@ -8,29 +8,35 @@
  * 
  * 📸 HOW TO CHANGE YOUR PROFILE PHOTO:
  * 1. Place your new photo in: `/src/assets/images/my_photo.jpg`
- * 2. Update line 79 below: `avatarImage: "/src/assets/images/my_photo.jpg"`
+ * 2. Update line 89 below: `avatarImage: "/src/assets/images/my_photo.jpg"`
  * 
  * 📄 HOW TO UPDATE YOUR RESUME:
  * 1. Upload your resume PDF to Google Drive or place it in `/public/resume.pdf`
- * 2. Update line 83 below: `resumeUrl: "https://drive.google.com/..."` or `"/resume.pdf"`
+ * 2. Update line 93 below: `resumeUrl: "https://drive.google.com/..."` or `"/resume.pdf"`
  * ============================================================================
  */
+
+export interface ProjectTechGroup {
+  group: string;
+  items: string[];
+}
 
 export interface ProjectItem {
   id: string;
   title: string;
+  shortTitle: string;
   category: string;
   shortDescription: string;
   problemStatement: string;
   solution: string;
   myContribution: string;
   technologies: string[];
-  status: 'Concept / Research' | 'Ongoing Prototype' | 'Completed' | 'Hackathon Build';
+  techGroups?: ProjectTechGroup[];
+  status: 'Completed' | 'Ongoing Prototype' | 'Hackathon Build';
   contextTag: string;
   githubUrl?: string;
   demoUrl?: string;
   featured: boolean;
-  isPlaceholder?: boolean;
 }
 
 export interface SkillCategory {
@@ -48,7 +54,7 @@ export interface ExperienceItem {
   organization: string;
   location: string;
   period: string;
-  type: 'Internship' | 'Community' | 'Open Source';
+  type: 'Open Source' | 'Community' | 'Internship';
   collaborationNotice?: string;
   bulletPoints: string[];
   tags: string[];
@@ -60,7 +66,24 @@ export interface CertificationItem {
   period: string;
   badgeText?: string;
   description: string;
-  credentialUrl?: string;
+}
+
+export interface CompetitionItem {
+  title: string;
+  eventOrContext: string;
+  institution?: string;
+  recognition: string;
+  award?: string;
+}
+
+export interface EducationItem {
+  institution: string;
+  degree: string;
+  grade: string;
+  period?: string;
+  location: string;
+  recognition?: string;
+  details?: string[];
 }
 
 export interface CodingProfile {
@@ -69,6 +92,7 @@ export interface CodingProfile {
   profileUrl: string;
   metricLabel: string;
   metricValue: string;
+  description: string;
   isConfigured: boolean;
 }
 
@@ -105,10 +129,35 @@ export const PORTFOLIO_DATA = {
     highlights: [
       { label: "Institution", value: "Chennai Institute of Technology" },
       { label: "Class Of", value: "2029 (Undergraduate)" },
-      { label: "Primary Focus", value: "Full-Stack Development & Problem Solving" },
+      { label: "Current CGPA", value: "8.60 / 10" },
       { label: "Status", value: "Available for Internships & Collaborations" }
     ]
   },
+
+  // Education Background
+  education: [
+    {
+      institution: "Chennai Institute of Technology",
+      degree: "B.E. Computer Science and Engineering",
+      grade: "CGPA: 8.60 / 10",
+      period: "2025 – 2029",
+      location: "Chennai, Tamil Nadu",
+      details: [
+        "Core coursework in Data Structures, Object-Oriented Programming (C++, Java), and Database Systems."
+      ]
+    },
+    {
+      institution: "Chennai Girls Higher Secondary School",
+      degree: "Higher Secondary (Class XII) & Secondary (SSLC)",
+      grade: "Class XII: 94.8% · SSLC: 90.4%",
+      location: "Chennai, Tamil Nadu",
+      recognition: "School Topper — Class XII, 2025",
+      details: [
+        "Recognized as School Topper in Class XII in 2025.",
+        "Consistent academic excellence in Mathematics and Science foundations."
+      ]
+    }
+  ] as EducationItem[],
 
   // 2. Technical Skills
   skillCategories: [
@@ -116,8 +165,9 @@ export const PORTFOLIO_DATA = {
       title: "Programming Languages",
       description: "Core languages used for problem solving, algorithmic foundations, and academic coursework.",
       skills: [
-        { name: "C++", level: "Foundational", note: "Data structures & problem solving" },
-        { name: "Python", level: "Foundational", note: "Scripting, logic & data processing" }
+        { name: "C++", level: "Foundational", note: "Foundational knowledge · Data structures & problem solving" },
+        { name: "Java", level: "Foundational", note: "Foundational knowledge · Object-oriented programming & collections" },
+        { name: "Python", level: "Introductory Exposure", note: "Introductory exposure · Scripting, data preprocessing & logic" }
       ]
     },
     {
@@ -136,7 +186,7 @@ export const PORTFOLIO_DATA = {
       skills: [
         { name: "Django", level: "Introductory Exposure", note: "Models, views & ORM workflows" },
         { name: "PostgreSQL", level: "Introductory Exposure", note: "Relational queries & table schemas" },
-        { name: "Node.js", level: "Project-Based", note: "Lightweight runtime & Express services" }
+        { name: "Node.js", level: "Project-Based", note: "Runtime & lightweight services" }
       ]
     },
     {
@@ -144,215 +194,300 @@ export const PORTFOLIO_DATA = {
       description: "Version control systems, development environments, and collaborative design tools.",
       skills: [
         { name: "Git", level: "Foundational", note: "Branching, staging & version history" },
-        { name: "GitHub", level: "Foundational", note: "Pull requests, issues & code reviews" },
+        { name: "GitHub", level: "Foundational", note: "Pull requests, code reviews & collaboration" },
         { name: "VS Code", level: "Foundational", note: "Primary IDE & debugging" },
         { name: "Figma", level: "Foundational", note: "Wireframing & UI layout prototyping" },
-        { name: "Jira", level: "Introductory Exposure", note: "Basic sprint tracking & task workflows" }
+        { name: "Jira", level: "Introductory Exposure", note: "Basic task tracking & workflow familiarity" }
       ]
     },
     {
       title: "AI & Data Concepts",
-      description: "Analytical techniques and modern developer productivity tooling.",
+      description: "Analytical techniques and machine learning classification fundamentals.",
       skills: [
-        { name: "Machine Learning Fundamentals", level: "Introductory Exposure", note: "Supervised concepts & preprocessing" },
-        { name: "AI-Assisted Development Tools", level: "Project-Based", note: "Prompting, rapid prototyping & documentation" },
-        { name: "Data Handling Fundamentals", level: "Introductory Exposure", note: "Tabular data, cleaning & structured evaluation" }
+        { name: "Machine Learning Fundamentals", level: "Introductory Exposure", note: "Logistic Regression, Naive Bayes, supervised classification" },
+        { name: "Data Handling Fundamentals", level: "Introductory Exposure", note: "Pandas, NumPy, Matplotlib & data preparation" },
+        { name: "AI-Assisted Development Tools", level: "Project-Based", note: "Prompting, rapid prototyping & documentation" }
       ]
     }
   ] as SkillCategory[],
 
-  // 3. Featured Projects
+  // 3. Projects (ReFlow Access completely removed)
   projects: [
     {
-      id: "reflow-access",
-      title: "ReFlow Access",
-      category: "Data-Driven Menstrual Health Systems",
-      status: "Concept / Research",
-      contextTag: "Public Health Technology Concept",
+      id: "phishguard",
+      title: "PhishGuard — Real-Time Phishing URL and Spam Email Detection System",
+      shortTitle: "PhishGuard",
+      category: "Academic Project-Based Learning — Machine Learning",
+      status: "Completed",
+      contextTag: "Academic Project-Based Learning (ML)",
       featured: true,
       shortDescription:
-        "A concept for improving menstrual-product accessibility through stock monitoring, availability information, and shortage-prevention insights.",
+        "A machine learning-based system designed to detect potentially malicious phishing URLs and spam emails. Developed as part of an academic Project-Based Learning (PBL) course in Machine Learning, applying classification models to identify suspicious URLs and email content.",
       problemStatement:
-        "Unpredictable stockouts in institutional and community restrooms create sudden emergencies and hygiene challenges. Users lack real-time visibility into availability, while administrators lack proactive restocking data.",
+        "Online users and organizations face ongoing cybersecurity risks from deceptive phishing URLs and fraudulent spam emails that evade static rule-based filters.",
       solution:
-        "Proposed a connected monitoring concept that gathers dispenser stock indicators and surfaces a transparent availability interface. The system notifies facility teams before supplies deplete, mitigating regional inventory gaps.",
+        "PhishGuard applies machine learning techniques to classify suspicious URLs and email content. The system uses Logistic Regression and Naive Bayes, along with Python-based data preprocessing and feature preparation, to support phishing URL and spam email detection.",
       myContribution:
-        "Conceived the project architecture, defined user workflows for both beneficiaries and administrators, mapped data schemas for inventory tracking, and designed initial UI wireframes.",
-      technologies: ["Web Development", "Data Analytics Concepts", "IoT System Architecture", "Figma UI Prototyping"],
-      githubUrl: "https://github.com/Kaviyasree-N/reflow-access",
+        "Developed data preprocessing and feature preparation pipelines in Python using Pandas and NumPy, implemented and evaluated Logistic Regression and Naive Bayes classifiers with Scikit-learn, and designed user interface views using Google AI Studio.",
+      technologies: [
+        "Python",
+        "Machine Learning",
+        "Logistic Regression",
+        "Naive Bayes",
+        "Pandas",
+        "NumPy",
+        "Scikit-learn",
+        "Matplotlib",
+        "Google AI Studio"
+      ],
+      githubUrl: "https://github.com/Kaviyasree-N",
       demoUrl: undefined
     },
     {
       id: "haulai",
-      title: "HaulAI",
-      category: "AI-Powered Freight Coordination",
+      title: "HaulAI — Your AI Freight & Transport Coordinator",
+      shortTitle: "HaulAI",
+      category: "Hackathon Project — CALL-E",
       status: "Hackathon Build",
-      contextTag: "Hackathon Project",
+      contextTag: "CALL-E Hackathon Project",
       featured: true,
       shortDescription:
-        "An AI-assisted freight coordination platform concept exploring transporter communication, quote comparison, and route cost estimation.",
+        "An AI-powered freight coordination platform that uses AI voice agents to call transporters, negotiate rates, compare quotes, and recommend the best transport option within budget, with human approval required before booking.",
       problemStatement:
-        "Small shippers and freight operators struggle with scattered communication channels, manual quote reconciliation across multiple truckers, and opaque pricing variances.",
+        "Freight and logistics coordination frequently involves manual phone calls, fragmented transporter communication channels, and time-consuming quote reconciliation across multiple operators.",
       solution:
-        "Developed a prototype coordination portal that processes rate inquiries, formats quote comparisons into a structured dashboard, and assists dispatchers in evaluating shipping options efficiently.",
+        "Explores how voice AI can simplify freight coordination and transport booking workflows by deploying AI voice agents to communicate with transporters, compile quote comparisons into a structured dashboard, and recommend optimal options while strictly enforcing human approval before booking.",
       myContribution:
-        "Contributed to frontend interface components in React and Tailwind CSS, integrated responsive quote comparison tables, and assisted with backend service endpoints for data formatting.",
-      technologies: ["React", "TypeScript", "Tailwind CSS", "Node.js", "Express", "AI Integration Concepts"],
-      githubUrl: "https://github.com/Kaviyasree-N/haulai",
+        "Developed frontend interface components using React, TypeScript, and Tailwind CSS, integrated responsive quote comparison tables, and assisted in configuring client-side state with LocalStorage and Node.js/Express service endpoints.",
+      technologies: [
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Node.js",
+        "Express",
+        "CALL-E Voice AI",
+        "Google Gemini",
+        "LocalStorage"
+      ],
+      githubUrl: "https://github.com/Kaviyasree-N",
       demoUrl: undefined
     },
     {
-      id: "citevent-erp",
-      title: "CITEVENT ERP",
-      category: "Event and Workflow Management",
+      id: "citevent",
+      title: "CITEVENT: College Event Management System",
+      shortTitle: "CITEVENT",
+      category: "Internship Project — Product Development",
       status: "Ongoing Prototype",
-      contextTag: "Product Development Internship Project",
+      contextTag: "CITBIF Internship Project",
       featured: true,
       shortDescription:
-        "A college event-management system concept covering event creation, multi-tier approval workflows, registrations, and participant records.",
+        "A full-stack web application designed to manage college events, participant registrations, approvals, payments, and administrative operations through a centralized dashboard. Developed as part of an internship at CIT Business Incubation Forum (CITBIF).",
       problemStatement:
-        "College event organization involves manual paper approvals, dispersed participant lists, uncoordinated budgeting reviews, and delayed hall reservations.",
+        "Managing college events involves disparate administrative workflows, manual approval chains, disconnected participant lists, and uncoordinated budgeting records across departments.",
       solution:
-        "Constructed an internal event management prototype streamlining the lifecycle of campus events: departmental proposal submission, administrative approval tracking, and student sign-ups.",
+        "Engineered an institutional event management system to streamline the complete lifecycle of campus events: departmental proposal submissions, administrative approval hierarchies, student registration tracking, and participant management.",
       myContribution:
-        "Worked as part of an intern cohort implementing UI screens in React, connecting endpoints to a Django backend, and querying relational PostgreSQL schemas for event participant records.",
-      technologies: ["React", "Django", "PostgreSQL", "REST APIs", "Git Collaboration"],
-      githubUrl: "https://github.com/Kaviyasree-N/citevent-erp",
+        "Contributed as part of an intern cohort at CIT Business Incubation Forum (CITBIF) developing responsive interface screens in React, connecting endpoints to a Django backend, and querying relational PostgreSQL schemas for event participant records.",
+      technologies: [
+        "React",
+        "Django",
+        "PostgreSQL",
+        "REST APIs",
+        "Git Collaboration"
+      ],
+      githubUrl: "https://github.com/Kaviyasree-N",
       demoUrl: undefined
     },
     {
-      id: "ml-predictive-system",
-      title: "Machine Learning Exploration Project",
-      category: "Applied Machine Learning & Data Modeling",
+      id: "internship-recommendation-system",
+      title: "Internship Recommendation System",
+      shortTitle: "Internship Recommendation System",
+      category: "Academic Project-Based Learning — Java",
       status: "Completed",
-      contextTag: "Academic & Practical Exploration",
-      featured: false,
-      isPlaceholder: true,
+      contextTag: "Academic Project-Based Learning (Java)",
+      featured: true,
       shortDescription:
-        "Structured predictive analysis and data modeling exploration using supervised learning techniques.",
+        "A Java-based desktop application that helps students discover suitable internship opportunities based on their academic qualifications, skills, interests, preferred locations, and stipend expectations using a rule-based matching score.",
       problemStatement:
-        "Examining structured tabular data to detect trends, classify patterns, and evaluate predictive accuracy.",
+        "Students seeking internship opportunities often struggle to filter through scattered listings to find positions matching their exact academic criteria, skillsets, preferred locations, and compensation preferences.",
       solution:
-        "Implemented data preprocessing pipelines, feature encoding, exploratory data visualization, and trained comparative benchmark models to assess validation accuracy.",
+        "Built using Java Swing, Object-Oriented Programming, the Java Collections Framework, and file-based storage, the application combines personalized internship recommendations with manual search, filtering, and sorting. The system uses a rule-based recommendation approach to evaluate candidate preferences and display a matching score for internship opportunities.",
       myContribution:
-        "Performed data hygiene checks, split evaluation datasets, trained baseline models, and documented findings and error metrics.",
-      technologies: ["Python", "Pandas", "NumPy", "Scikit-Learn", "Matplotlib"],
-      githubUrl: "https://github.com/Kaviyasree-N/machine-learning-study",
+        "Designed the Object-Oriented architecture, implemented Java Swing GUI with background concurrency using SwingWorker and Threads, built custom exception handling and validation, and developed Comparator-based multi-criteria sorting with Java File I/O persistence.",
+      technologies: [
+        "Java",
+        "Java Swing",
+        "Object-Oriented Programming",
+        "Collections (ArrayList, HashMap, HashSet)",
+        "Comparator / List.sort()",
+        "Java File I/O",
+        "Threads & SwingWorker",
+        "Input Validation & Exceptions",
+        "Git & GitHub"
+      ],
+      techGroups: [
+        { group: "Language", items: ["Java"] },
+        { group: "GUI", items: ["Java Swing"] },
+        { group: "Programming Principles", items: ["Object-Oriented Programming"] },
+        { group: "Collections", items: ["ArrayList", "HashMap", "HashSet"] },
+        { group: "Sorting", items: ["Comparator", "List.sort()"] },
+        { group: "Storage", items: ["Java File I/O"] },
+        { group: "Concurrency", items: ["Threads", "SwingWorker", "Event Dispatch Thread"] },
+        { group: "Reliability", items: ["Input validation", "Exception handling", "Custom exceptions"] },
+        { group: "Version Control", items: ["Git", "GitHub"] }
+      ],
+      githubUrl: "https://github.com/Kaviyasree-N",
       demoUrl: undefined
     }
   ] as ProjectItem[],
 
-  // 4. Experience & Community
+  // 4. Experience & Community (Order: 1. GirlScript GSSoC 2026, 2. GSX Chennai Chapter 2026 onwards)
   experiences: [
-    {
-      role: "Product Development Intern",
-      organization: "CITBIF Internship Program",
-      location: "Chennai Institute of Technology",
-      period: "2026",
-      type: "Internship",
-      collaborationNotice: "Collaborative internship program involving peer engineering teams and mentor reviews.",
-      bulletPoints: [
-        "Participated in hands-on product research and user requirement analysis for internal institutional software prototypes.",
-        "Collaborated on UI/UX wireframes, design audits, and component structure in Figma before frontend implementation.",
-        "Contributed to frontend views and connected interactive forms with backend services and database models.",
-        "Exercised version control best practices through structured Git branching, pull request reviews, and agile team stand-ups.",
-        "Authored technical documentation outlining module workflows and API request/response structures."
-      ],
-      tags: ["Requirements Analysis", "UI Prototyping", "Full-Stack Exposure", "Git & Agile", "Documentation"]
-    },
-    {
-      role: "Core Team Member",
-      organization: "GSX Chennai Chapter",
-      location: "Chennai, India",
-      period: "2025 – Present",
-      type: "Community",
-      bulletPoints: [
-        "Active member of student-driven technical community dedicated to peer-to-peer knowledge sharing and practical coding.",
-        "Assisted in coordinating technical workshops, coding sessions, and peer learning circles for junior engineering students.",
-        "Engaged in technical discussions on emerging developer tools, open-source practices, and project building."
-      ],
-      tags: ["Student Community", "Peer Mentorship", "Technical Coordination", "Teamwork"]
-    },
     {
       role: "Open Source Contributor",
       organization: "GirlScript Summer of Code (GSSoC 2026)",
       location: "Remote / Open Source",
       period: "2026",
       type: "Open Source",
+      collaborationNotice: "Participated in open-source repositories following maintainer guidelines and code reviews.",
       bulletPoints: [
         "Contributed to open-source software repositories by identifying issues, improving documentation, and submitting code enhancements.",
         "Successfully achieved 2 merged pull requests adhering to repository maintainer guidelines, code linting standards, and commit conventions.",
-        "Gained practical experience navigating unfamiliar large codebases and addressing feedback from maintainers."
+        "Gained practical experience navigating unfamiliar codebases and addressing feedback from maintainers."
       ],
       tags: ["Open Source", "Git Collaboration", "Pull Requests", "Code Review"]
+    },
+    {
+      role: "Core Team Member",
+      organization: "GSX Chennai Chapter",
+      location: "Chennai, India",
+      period: "2026 onwards",
+      type: "Community",
+      collaborationNotice: "Collaborative student-driven technical community initiative.",
+      bulletPoints: [
+        "Active member of student-driven technical community dedicated to peer-to-peer knowledge sharing and practical coding.",
+        "Assisted in coordinating technical workshops, coding sessions, and peer learning circles for junior engineering students.",
+        "Engaged in technical discussions on emerging developer tools, open-source practices, and project building."
+      ],
+      tags: ["Student Community", "Peer Mentorship", "Technical Coordination", "Teamwork"]
     }
   ] as ExperienceItem[],
 
-  // 5. Achievements & Certifications
-  achievements: [
+  // 5. Achievements Page: Section A (Certifications) & Section B (Competitions & Recognition)
+  certifications: [
     {
-      title: "Oracle AI Foundations Associate",
+      title: "OCI Foundations Associate",
       issuer: "Oracle",
       period: "Completed",
-      badgeText: "Certified",
-      description:
-        "Foundational understanding of Artificial Intelligence, Machine Learning concepts, deep learning principles, and modern AI architectures.",
-      credentialUrl: "https://catalog-education.oracle.com/"
+      badgeText: "Oracle Certified",
+      description: "Demonstrated fundamental understanding of Oracle Cloud Infrastructure (OCI) architecture, core cloud concepts, security, and governance."
+    },
+    {
+      title: "OCI AI Foundations Associate",
+      issuer: "Oracle",
+      period: "Completed",
+      badgeText: "Oracle Certified",
+      description: "Foundational understanding of Artificial Intelligence, Machine Learning workloads, deep learning principles, and modern AI architectures in Oracle Cloud."
+    },
+    {
+      title: "Diploma in Computer Applications (DCA)",
+      issuer: "CSC — Computer Software College",
+      period: "Completed",
+      badgeText: "Diploma",
+      description: "Completed a Diploma in Computer Applications covering Microsoft Office applications, C programming, and C++ programming, gaining practical knowledge of office productivity tools and programming fundamentals."
+    },
+    {
+      title: "English Typewriting — Distinction",
+      issuer: "Department of Technical Education / State Board",
+      period: "Completed",
+      badgeText: "Distinction",
+      description: "Obtained Distinction in English Typewriting."
     },
     {
       title: "NPTEL Internet of Things",
       issuer: "NPTEL & IIT Kharagpur",
       period: "Elite + Silver",
       badgeText: "Elite + Silver",
-      description:
-        "Certification covering IoT sensor architectures, networking protocols, edge computing paradigms, and device data ingestion.",
-      credentialUrl: "https://nptel.ac.in/"
+      description: "Comprehensive certification covering IoT sensor architectures, networking protocols, edge computing paradigms, and device data ingestion."
     },
     {
-      title: "Python Essentials 1 & 2",
+      title: "Python Essentials 1",
       issuer: "Python Institute & Cisco Networking Academy",
       period: "Completed",
       badgeText: "Accredited",
-      description:
-        "Fundamentals of Python syntax, object-oriented programming, data structures, modules, exceptions, and file processing.",
-      credentialUrl: "https://pythoninstitute.org/"
+      description: "Validated fundamentals of Python syntax, logic, data structures, conditional execution, and structured procedural programming."
     },
     {
-      title: "GirlScript Summer of Code 2026",
-      issuer: "GirlScript Foundation",
-      period: "Summer 2026",
-      badgeText: "2 Merged PRs",
-      description:
-        "Open-source contributor with 2 successfully merged pull requests in community repositories, participating in structured code reviews.",
-      credentialUrl: "https://gssoc.girlscript.tech/"
+      title: "Python Essentials 2",
+      issuer: "Python Institute & Cisco Networking Academy",
+      period: "Completed",
+      badgeText: "Accredited",
+      description: "Validated advanced Python concepts covering Object-Oriented Programming, custom modules, packages, exceptions, and file processing."
     }
   ] as CertificationItem[],
 
-  // 6. Coding Profiles
-  codingProfiles: [
+  competitions: [
     {
-      platform: "GitHub",
-      username: "Kaviyasree-N",
-      profileUrl: "https://github.com/Kaviyasree-N",
-      metricLabel: "Repositories & Open Source",
-      metricValue: "Active Repositories",
-      isConfigured: true
+      title: "First Prize — Data Detox",
+      eventOrContext: "TEXUS",
+      institution: "SRM Institute of Science and Technology, Ramapuram",
+      recognition: "First Prize in Data Detox, a technical competition held as part of the TEXUS event.",
+      award: "Cash prize and certificate."
     },
+    {
+      title: "ReFlow Hackathon — Pre-Finale Selection",
+      eventOrContext: "ReFlow Hackathon",
+      institution: "IIT Bhubaneswar",
+      recognition: "Shortlisted for the pre-finale round of the ReFlow Hackathon organized by IIT Bhubaneswar."
+    },
+    {
+      title: "School Topper — Class XII, 2025",
+      eventOrContext: "Academic Excellence",
+      institution: "Chennai Girls Higher Secondary School",
+      recognition: "Recognized as School Topper in Class XII in 2025 with an aggregate score of 94.8%."
+    }
+  ] as CompetitionItem[],
+
+  // 6. Coding Profiles & Practice (Featured on Connect & Contact Page)
+  codingPractice: [
     {
       platform: "LeetCode",
       username: "Kaviyasree2007",
       profileUrl: "https://leetcode.com/u/Kaviyasree2007/",
-      metricLabel: "Problem Solving Practice",
-      metricValue: "DSA & Problem Solving",
+      metricLabel: "Practice",
+      metricValue: "350+ Problems",
+      description: "Practiced programming and Data Structures and Algorithms concepts, including arrays, strings, hash maps, sorting, searching, and related fundamentals.",
       isConfigured: true
     },
     {
-      platform: "LinkedIn",
-      username: "kaviya-sree-n-a6293b380",
-      profileUrl: "https://www.linkedin.com/in/kaviya-sree-n-a6293b380/",
-      metricLabel: "Professional Network",
-      metricValue: "Chennai, India",
+      platform: "CodeChef",
+      username: "kaviyasreen",
+      profileUrl: "https://www.codechef.com/users/kaviyasreen",
+      metricLabel: "Practice",
+      metricValue: "300+ Problems",
+      description: "Practiced programming fundamentals and basic problem-solving concepts through coding problems.",
       isConfigured: true
     }
-  ] as CodingProfile[]
+  ] as CodingProfile[],
+
+  socialProfiles: [
+    {
+      platform: "LinkedIn",
+      username: "kaviya-sree-n-a6293b380",
+      label: "Professional Network",
+      profileUrl: "https://www.linkedin.com/in/kaviya-sree-n-a6293b380/"
+    },
+    {
+      platform: "GitHub",
+      username: "Kaviyasree-N",
+      label: "Code Repositories",
+      profileUrl: "https://github.com/Kaviyasree-N"
+    },
+    {
+      platform: "Email",
+      username: "kaviyasreen251207@gmail.com",
+      label: "Direct Email",
+      profileUrl: "mailto:kaviyasreen251207@gmail.com"
+    }
+  ]
 };

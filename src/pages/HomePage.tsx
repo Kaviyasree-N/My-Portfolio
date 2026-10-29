@@ -11,7 +11,13 @@ import {
   Building2,
   GraduationCap,
   MapPin,
-  Github,
+  Award,
+  BookOpen,
+  Code2,
+  Users,
+  Cpu,
+  CheckCircle2,
+  UserCheck,
 } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../config/portfolioData';
 
@@ -22,19 +28,46 @@ interface LayoutContext {
 export const HomePage: React.FC = () => {
   const { openResume } = useOutletContext<LayoutContext>();
   const [imageError, setImageError] = useState(false);
-  const { profile, projects, skillCategories, experiences } = PORTFOLIO_DATA;
+  const { profile, education } = PORTFOLIO_DATA;
 
-  // Selected featured projects for homepage teaser
-  const featuredProjects = projects.filter((p) => p.featured).slice(0, 2);
+  const corePillars = [
+    {
+      icon: BookOpen,
+      title: 'Strong Foundations First',
+      text: 'Prioritizing solid data structures, algorithm problem-solving in C++ and Java, and clean programming principles over superficial trends.',
+    },
+    {
+      icon: Code2,
+      title: 'Hands-on Project Building',
+      text: 'Consolidating theoretical learning by architecting and developing practical prototypes, from machine learning systems to event platforms.',
+    },
+    {
+      icon: Users,
+      title: 'Community & Peer Collaboration',
+      text: 'Actively participating in technical student chapters, collaborative internship teams, and open-source contributions.',
+    },
+    {
+      icon: Cpu,
+      title: 'Broad Technical Curiosity',
+      text: 'Exploring backend services, relational schema design in PostgreSQL, and practical machine learning fundamentals.',
+    },
+  ];
 
-  // Top skill teasers
-  const programmingSkills = skillCategories.find((c) => c.title === 'Programming Languages')?.skills || [];
-  const webSkills = skillCategories.find((c) => c.title === 'Web Development')?.skills || [];
+  const academicCoursework = [
+    'Data Structures & Algorithms',
+    'Object-Oriented Programming (C++, Java)',
+    'Database Management Systems (PostgreSQL)',
+    'Operating Systems Fundamentals',
+    'Computer Networks & Protocols',
+    'Internet of Things Architectures',
+  ];
 
   return (
     <div className="relative">
-      {/* Hero Section */}
-      <section className="relative pt-16 pb-20 md:pt-24 md:pb-28 overflow-hidden">
+      {/* =========================================================================
+          1. HERO SECTION
+          ========================================================================= */}
+      <section className="relative pt-16 pb-16 md:pt-24 md:pb-24 overflow-hidden">
         {/* Subtle ambient lighting */}
         <div
           className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[320px] bg-blue-600/10 blur-[130px] rounded-full pointer-events-none -z-10"
@@ -43,7 +76,7 @@ export const HomePage: React.FC = () => {
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-            {/* Left Column: Introduction & CTAs */}
+            {/* Left Column: Introduction & Action Buttons */}
             <div className="lg:col-span-7 flex flex-col items-start">
               {/* Introduction Label */}
               <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-wide text-blue-400 uppercase mb-4">
@@ -61,7 +94,7 @@ export const HomePage: React.FC = () => {
                 {profile.introduction}
               </p>
 
-              {/* Actions: Primary CTA, Secondary CTA, Resume & Contact */}
+              {/* Actions: Primary CTA, About Anchor, Resume & Contact */}
               <div className="flex flex-wrap items-center gap-3.5 mb-8">
                 <Link
                   to="/projects"
@@ -71,12 +104,12 @@ export const HomePage: React.FC = () => {
                   <ArrowRight size={16} />
                 </Link>
 
-                <Link
-                  to="/about"
-                  className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-slate-200 bg-slate-800/80 hover:bg-slate-700 hover:text-white border border-slate-700/60 rounded-lg transition-colors"
+                <a
+                  href="#about-me"
+                  className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-slate-200 bg-slate-800/80 hover:bg-slate-700 hover:text-white border border-slate-700/60 rounded-lg transition-colors cursor-pointer"
                 >
                   <span>About Me</span>
-                </Link>
+                </a>
 
                 <button
                   type="button"
@@ -91,12 +124,12 @@ export const HomePage: React.FC = () => {
                   to="/contact"
                   className="inline-flex items-center text-sm font-medium text-blue-400 hover:text-blue-300 py-2 px-1 hover:underline underline-offset-4 gap-1"
                 >
-                  <span>Get in Touch</span>
+                  <span>Connect with Me</span>
                   <span aria-hidden="true">&rarr;</span>
                 </Link>
               </div>
 
-              {/* Quick Institutional Context */}
+              {/* Institutional Context */}
               <div className="flex flex-wrap items-center gap-y-2 gap-x-4 text-xs text-slate-400">
                 <span className="inline-flex items-center gap-1.5">
                   <Building2 size={14} className="text-slate-400" />
@@ -153,183 +186,190 @@ export const HomePage: React.FC = () => {
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Factual Highlight Strip */}
-          <div className="mt-14 pt-8 border-t border-slate-800/80 grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
-            {profile.highlights.map((item, idx) => (
-              <div key={idx} className="space-y-1">
-                <span className="block text-xs font-medium text-slate-400 uppercase tracking-wider">
-                  {item.label}
-                </span>
-                <span className="block text-sm font-semibold text-slate-200">
-                  {item.value}
-                </span>
-              </div>
-            ))}
+      {/* =========================================================================
+          2. ABOUT ME SECTION
+          ========================================================================= */}
+      <section id="about-me" className="py-16 border-t border-slate-800/80 bg-[#080c14]/40 scroll-mt-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-8">
+            <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-wide text-blue-400 uppercase mb-2">
+              <UserCheck size={14} />
+              <span>Background &amp; Learning Journey</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+              About Me
+            </h2>
+          </div>
+
+          <div className="space-y-4 text-base text-slate-300 leading-relaxed">
+            <p>
+              I am currently pursuing a Bachelor of Engineering in Computer Science and Engineering at{' '}
+              <strong className="text-white font-semibold">{profile.institution}</strong> in Chennai. My journey into technology started with a simple motivation: understanding how things work beneath the surface and turning structured problem-solving into dependable software.
+            </p>
+            <p>
+              I spend my time strengthening core fundamentals through deliberate coding practice, exploring data structures and algorithms in C++ and Java, learning web protocols and REST patterns, and building applications with modern frontend libraries and backend services.
+            </p>
+            <p>
+              I value clear communication, honest collaboration, and disciplined version control. In internships and student technical communities, I make it a point to understand project requirements thoroughly, solicit feedback early, and document my work cleanly so teams can build on it seamlessly.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Featured Projects Teaser */}
-      <section className="py-16 border-t border-slate-800/60 bg-[#080c14]/50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
-            <div>
-              <span className="text-xs font-semibold tracking-wider uppercase text-blue-400 block mb-1">
-                Selected Work
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-bold text-white">
-                Featured Projects
+      {/* =========================================================================
+          3. EDUCATION SECTION
+          ========================================================================= */}
+      <section id="education" className="py-16 border-t border-slate-800/80 bg-[#080c14]/70 scroll-mt-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-10">
+            <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-wide text-blue-400 uppercase mb-2">
+              <GraduationCap size={15} />
+              <span>Academic Qualifications</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+              Education
+            </h2>
+            <p className="text-sm text-slate-400 mt-1 max-w-xl">
+              Academic qualifications, coursework foundation, and school honors.
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            {/* Chennai Institute of Technology Card */}
+            <div className="p-6 sm:p-7 rounded-2xl bg-slate-900/40 border border-slate-800 hover:border-slate-700/80 transition-all space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+                <div>
+                  <span className="text-xs font-semibold text-blue-400 uppercase tracking-wider block mb-1">
+                    Undergraduate Degree
+                  </span>
+                  <h3 className="text-lg sm:text-xl font-bold text-white">
+                    Bachelor of Engineering — Computer Science &amp; Engineering
+                  </h3>
+                  <p className="text-sm text-slate-300 mt-1 flex items-center gap-2">
+                    <Building2 size={15} className="text-slate-400" />
+                    <span>Chennai Institute of Technology</span>
+                  </p>
+                  <p className="text-xs text-slate-400 mt-0.5 flex items-center gap-2">
+                    <MapPin size={13} className="text-slate-400" />
+                    <span>Affiliated with Anna University · Chennai, Tamil Nadu, India</span>
+                  </p>
+                </div>
+
+                <div className="inline-flex items-center gap-1.5 text-xs font-mono text-slate-400 bg-slate-800/80 px-3 py-1 rounded-md border border-slate-700/60 self-start sm:self-auto shrink-0">
+                  <span>Class of 2029 (2025 – 2029)</span>
+                </div>
+              </div>
+
+              <div className="p-3 rounded-lg bg-slate-950/60 border border-slate-800/80">
+                <span className="text-xs text-slate-400 block font-medium">Academic Score:</span>
+                <span className="text-sm font-semibold text-blue-300 font-mono">
+                  CGPA: 8.60 / 10
+                </span>
+              </div>
+
+              <div className="pt-2 border-t border-slate-800/60 text-xs text-slate-300 space-y-2">
+                <strong className="text-slate-200 block">Core Coursework &amp; Academic Focus:</strong>
+                <div className="flex flex-wrap gap-2 pt-0.5">
+                  {academicCoursework.map((course) => (
+                    <span
+                      key={course}
+                      className="px-2.5 py-1 rounded-md bg-slate-800/60 border border-slate-700/50 text-slate-300 font-mono text-[11px]"
+                    >
+                      {course}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Chennai Girls Higher Secondary School Card */}
+            <div className="p-6 sm:p-7 rounded-2xl bg-slate-900/40 border border-slate-800 hover:border-slate-700/80 transition-all space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+                <div>
+                  <span className="text-xs font-semibold text-blue-400 uppercase tracking-wider block mb-1">
+                    Secondary &amp; Higher Secondary
+                  </span>
+                  <h3 className="text-lg sm:text-xl font-bold text-white">
+                    Chennai Girls Higher Secondary School
+                  </h3>
+                  <p className="text-xs text-slate-400 mt-1 flex items-center gap-2">
+                    <MapPin size={13} className="text-slate-400" />
+                    <span>Chennai, Tamil Nadu</span>
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-3 rounded-lg bg-slate-950/60 border border-slate-800/80">
+                <span className="text-xs text-slate-400 block font-medium">Performance / Aggregate:</span>
+                <span className="text-sm font-semibold text-blue-300 font-mono">
+                  Class XII: 94.8% · SSLC: 90.4%
+                </span>
+              </div>
+
+              <div className="flex items-center gap-2 p-2.5 rounded-lg bg-amber-950/20 border border-amber-800/40 text-amber-200 text-xs">
+                <Award size={15} className="text-amber-400 shrink-0" />
+                <span className="font-medium">School Topper — Class XII, 2025</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          4. ADDITIONAL ABOUT CONTENT: APPROACH & KEY FOCUS AREAS
+          ========================================================================= */}
+      <section className="py-16 border-t border-slate-800/80 bg-[#080c14]/50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          {/* Subsection: Approach to Engineering & Learning (4 Pillars) */}
+          <div>
+            <div className="mb-6">
+              <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-wide text-blue-400 uppercase mb-2">
+                <Cpu size={14} />
+                <span>Core Engineering Pillars</span>
+              </div>
+              <h2 className="text-2xl font-bold tracking-tight text-white">
+                Approach to Engineering &amp; Learning
               </h2>
             </div>
-            <Link
-              to="/projects"
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors self-start sm:self-auto"
-            >
-              <span>View All Projects</span>
-              <ArrowRight size={14} />
-            </Link>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {featuredProjects.map((project) => (
-              <div
-                key={project.id}
-                className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 hover:border-slate-700 transition-all flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between text-xs text-slate-400 mb-2">
-                    <span className="text-blue-400 font-medium">{project.category}</span>
-                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-800/80 border border-slate-700/60">
-                      {project.status}
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-bold text-white mb-2">
-                    {project.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
-                    {project.shortDescription}
-                  </p>
-                  <div className="flex flex-wrap gap-1.5 mb-5">
-                    {project.technologies.slice(0, 4).map((tech) => (
-                      <span
-                        key={tech}
-                        className="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-800/50 text-slate-300 border border-slate-700/40"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-slate-800 flex items-center justify-between text-xs">
-                  <Link
-                    to={`/projects/${project.id}`}
-                    className="inline-flex items-center gap-1 font-semibold text-blue-400 hover:text-blue-300"
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {corePillars.map((pillar, idx) => {
+                const Icon = pillar.icon;
+                return (
+                  <div
+                    key={idx}
+                    className="p-5 rounded-xl bg-slate-900/30 border border-slate-800 hover:border-slate-700 transition-colors"
                   >
-                    <span>Read Details</span>
-                    <ArrowRight size={13} />
-                  </Link>
-                  {project.githubUrl && (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="p-1.5 text-slate-400 hover:text-white"
-                      title="GitHub Repository"
-                    >
-                      <Github size={15} />
-                    </a>
-                  )}
-                </div>
-              </div>
-            ))}
+                    <Icon size={20} className="text-blue-400 mb-3" />
+                    <h3 className="text-sm font-semibold text-white mb-1.5">
+                      {pillar.title}
+                    </h3>
+                    <p className="text-xs text-slate-300 leading-relaxed">
+                      {pillar.text}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </section>
 
-      {/* Skills & Experience Snapshot */}
-      <section className="py-16 border-t border-slate-800/60">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {/* Left: Skills Snapshot */}
-            <div className="lg:col-span-6 p-6 rounded-2xl bg-slate-900/30 border border-slate-800 space-y-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <span className="text-xs font-semibold tracking-wider uppercase text-blue-400 block mb-0.5">
-                    Skills
-                  </span>
-                  <h3 className="text-lg font-bold text-white">Technical Stack</h3>
-                </div>
-                <Link
-                  to="/skills"
-                  className="text-xs font-semibold text-blue-400 hover:text-blue-300 inline-flex items-center gap-1"
-                >
-                  <span>Full Skillset</span>
-                  <ArrowRight size={13} />
-                </Link>
-              </div>
-
-              <div className="space-y-3 pt-2">
-                <div className="p-3 rounded-lg bg-slate-950/60 border border-slate-800/60">
-                  <span className="text-xs font-semibold text-slate-200 block mb-1">
-                    Programming Languages
-                  </span>
-                  <div className="flex flex-wrap gap-1.5">
-                    {programmingSkills.map((s) => (
-                      <span key={s.name} className="text-xs font-mono px-2 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-900/40">
-                        {s.name} ({s.level})
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="p-3 rounded-lg bg-slate-950/60 border border-slate-800/60">
-                  <span className="text-xs font-semibold text-slate-200 block mb-1">
-                    Web &amp; Interfaces
-                  </span>
-                  <div className="flex flex-wrap gap-1.5">
-                    {webSkills.map((s) => (
-                      <span key={s.name} className="text-xs font-mono px-2 py-0.5 rounded bg-slate-800/60 text-slate-300 border border-slate-700/50">
-                        {s.name}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right: Recent Experience Highlight */}
-            <div className="lg:col-span-6 p-6 rounded-2xl bg-slate-900/30 border border-slate-800 space-y-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <span className="text-xs font-semibold tracking-wider uppercase text-blue-400 block mb-0.5">
-                    Experience
-                  </span>
-                  <h3 className="text-lg font-bold text-white">Recent Involvements</h3>
-                </div>
-                <Link
-                  to="/experience"
-                  className="text-xs font-semibold text-blue-400 hover:text-blue-300 inline-flex items-center gap-1"
-                >
-                  <span>All Experiences</span>
-                  <ArrowRight size={13} />
-                </Link>
-              </div>
-
-              <div className="space-y-3 pt-2">
-                {experiences.slice(0, 2).map((exp, idx) => (
-                  <div key={idx} className="p-3 rounded-lg bg-slate-950/60 border border-slate-800/60 text-xs">
-                    <div className="flex justify-between items-start mb-1">
-                      <span className="font-semibold text-slate-200">{exp.role}</span>
-                      <span className="font-mono text-slate-400">{exp.period}</span>
-                    </div>
-                    <p className="text-slate-400 mb-1">{exp.organization}</p>
-                    <p className="text-slate-300 line-clamp-1">{exp.bulletPoints[0]}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+          {/* Subsection: Key Focus Areas */}
+          <div className="p-6 sm:p-7 rounded-2xl bg-slate-900/30 border border-slate-800">
+            <h3 className="text-sm font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2">
+              <CheckCircle2 size={16} className="text-blue-400" />
+              <span>Key Focus Areas &amp; Current Goals</span>
+            </h3>
+            <ul className="space-y-3">
+              {profile.aboutSummary.map((item, index) => (
+                <li key={index} className="flex items-start gap-3 text-sm text-slate-300">
+                  <span className="text-blue-400 mt-0.5 shrink-0">·</span>
+                  <span className="leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>

@@ -9,6 +9,7 @@ import {
   Github,
   ExternalLink,
   ArrowRight,
+  FolderKanban,
 } from 'lucide-react';
 import { PORTFOLIO_DATA, ProjectItem } from '../config/portfolioData';
 import { Breadcrumbs } from '../components/layout/Breadcrumbs';
@@ -16,25 +17,7 @@ import { ProjectModal } from '../components/ProjectModal';
 
 export const ProjectsPage: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
-  const [activeCategory, setActiveCategory] = useState<string>('all');
   const { projects } = PORTFOLIO_DATA;
-
-  const categories = [
-    { id: 'all', label: 'All Projects' },
-    { id: 'featured', label: 'Featured' },
-    { id: 'health', label: 'Healthcare & IoT' },
-    { id: 'ai-logistics', label: 'AI & Logistics' },
-    { id: 'campus-erp', label: 'Campus ERP' },
-  ];
-
-  const filteredProjects = projects.filter((p) => {
-    if (activeCategory === 'all') return true;
-    if (activeCategory === 'featured') return p.featured;
-    if (activeCategory === 'health') return p.id.includes('reflow');
-    if (activeCategory === 'ai-logistics') return p.id.includes('haulai');
-    if (activeCategory === 'campus-erp') return p.id.includes('citevent');
-    return true;
-  });
 
   return (
     <div className="py-12 md:py-20">
@@ -50,31 +33,13 @@ export const ProjectsPage: React.FC = () => {
             Projects
           </h1>
           <p className="text-base text-slate-300 mt-2 max-w-2xl leading-relaxed">
-            Software applications, prototypes, and concepts built through coursework, internships, and hackathons.
+            Featured technical projects, machine learning systems, hackathon builds, and academic applications.
           </p>
-        </div>
-
-        {/* Category Filter Tabs */}
-        <div className="flex flex-wrap items-center gap-1.5 p-1 bg-slate-900/60 border border-slate-800 rounded-lg mb-8 max-w-fit">
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              type="button"
-              onClick={() => setActiveCategory(cat.id)}
-              className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors cursor-pointer ${
-                activeCategory === cat.id
-                  ? 'bg-blue-600 text-white shadow-sm'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              {cat.label}
-            </button>
-          ))}
         </div>
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {filteredProjects.map((project) => (
+          {projects.map((project) => (
             <article
               key={project.id}
               className="group flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-slate-900/40 border border-slate-800 hover:border-slate-700 transition-all duration-200 hover:shadow-xl hover:shadow-black/30"
@@ -82,11 +47,9 @@ export const ProjectsPage: React.FC = () => {
               <div>
                 {/* Header Metadata */}
                 <div className="flex items-center justify-between gap-3 text-xs text-slate-400 mb-3">
-                  <div className="flex items-center gap-2 truncate">
-                    <span className="text-blue-400 font-medium">{project.category}</span>
-                    <span aria-hidden="true" className="text-slate-600">·</span>
-                    <span className="truncate">{project.contextTag}</span>
-                  </div>
+                  <span className="text-blue-400 font-medium truncate">
+                    {project.category}
+                  </span>
                   <span className="text-[11px] font-mono shrink-0 text-slate-400 bg-slate-800/60 px-2 py-0.5 rounded border border-slate-700/50">
                     {project.status}
                   </span>
@@ -118,7 +81,7 @@ export const ProjectsPage: React.FC = () => {
 
                 {/* Technologies */}
                 <div className="flex flex-wrap gap-1.5 mb-6">
-                  {project.technologies.map((tech) => (
+                  {project.technologies.slice(0, 6).map((tech) => (
                     <span
                       key={tech}
                       className="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-800/50 text-slate-300 border border-slate-700/40"
@@ -126,6 +89,11 @@ export const ProjectsPage: React.FC = () => {
                       {tech}
                     </span>
                   ))}
+                  {project.technologies.length > 6 && (
+                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-900 text-slate-400 border border-slate-800">
+                      +{project.technologies.length - 6} more
+                    </span>
+                  )}
                 </div>
               </div>
 
