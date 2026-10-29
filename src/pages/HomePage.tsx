@@ -193,7 +193,7 @@ export const HomePage: React.FC = () => {
           2. ABOUT ME SECTION
           ========================================================================= */}
       <section id="about-me" className="py-16 border-t border-slate-800/80 bg-[#080c14]/40 scroll-mt-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
             <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-wide text-blue-400 uppercase mb-2">
               <UserCheck size={14} />
@@ -223,7 +223,7 @@ export const HomePage: React.FC = () => {
           3. EDUCATION SECTION
           ========================================================================= */}
       <section id="education" className="py-16 border-t border-slate-800/80 bg-[#080c14]/70 scroll-mt-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-10">
             <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-wide text-blue-400 uppercase mb-2">
               <GraduationCap size={15} />
@@ -322,7 +322,7 @@ export const HomePage: React.FC = () => {
           4. ADDITIONAL ABOUT CONTENT: APPROACH & KEY FOCUS AREAS
           ========================================================================= */}
       <section className="py-16 border-t border-slate-800/80 bg-[#080c14]/50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           {/* Subsection: Approach to Engineering & Learning (4 Pillars) */}
           <div>
             <div className="mb-6">

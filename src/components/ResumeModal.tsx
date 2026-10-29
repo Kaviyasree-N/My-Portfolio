@@ -60,8 +60,7 @@ TECHNICAL SKILLS
 - Machine Learning & Data: Logistic Regression, Naive Bayes, Pandas, NumPy, Scikit-learn
 
 KEY EXPERIENCE & INVOLVEMENTS
-1. ${experiences[0]?.role} - ${experiences[0]?.organization} (${experiences[0]?.period})
-2. ${experiences[1]?.role} - ${experiences[1]?.organization} (${experiences[1]?.period})
+${experiences.map((exp, idx) => `${idx + 1}. ${exp.role} - ${exp.organization} (${exp.period})`).join('\n')}
 
 PROJECTS
 - PhishGuard: Real-Time Phishing URL and Spam Email Detection System

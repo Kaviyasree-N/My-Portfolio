@@ -4,7 +4,6 @@
  */
 
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { ArrowUp, Github, Linkedin, Mail } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../../config/portfolioData';
 
@@ -20,44 +19,20 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="border-t border-slate-800/80 bg-[#060910] text-slate-400 text-xs py-8">
+    <footer className="border-t border-slate-800/80 bg-[#060910] text-slate-400 text-xs py-6">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800/60">
-          {/* Quick navigation links */}
-          <nav className="flex flex-wrap items-center gap-x-5 gap-y-2 text-slate-400" aria-label="Footer Navigation">
-            <Link to="/" className="hover:text-white transition-colors">Home</Link>
-            <Link to="/skills" className="hover:text-white transition-colors">Skills</Link>
-            <Link to="/projects" className="hover:text-white transition-colors">Projects</Link>
-            <Link to="/experience" className="hover:text-white transition-colors">Experience</Link>
-            <Link to="/achievements" className="hover:text-white transition-colors">Achievements</Link>
-            <Link to="/contact" className="hover:text-white transition-colors">Connect &amp; Contact</Link>
-          </nav>
-
-          {/* Back to top button */}
-          <button
-            type="button"
-            onClick={scrollToTop}
-            className="self-start sm:self-auto inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
-            aria-label="Back to top"
-          >
-            <span>Back to top</span>
-            <ArrowUp size={13} />
-          </button>
-        </div>
-
-        {/* Bottom row: Socials & copyright */}
-        <div className="pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-slate-500">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <p className="text-slate-400">
-            &copy; {currentYear} {profile.fullName}. Designed with clean typography and accessible standards.
+            &copy; {currentYear} {profile.fullName}. Computer Science Engineering Student, Chennai Institute of Technology.
           </p>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 sm:gap-5">
             {githubProfile && (
               <a
                 href={githubProfile.profileUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="hover:text-white transition-colors"
+                className="text-slate-400 hover:text-white transition-colors"
                 aria-label="GitHub Profile"
               >
                 <Github size={16} />
@@ -68,7 +43,7 @@ export const Footer: React.FC = () => {
                 href={linkedinProfile.profileUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="hover:text-white transition-colors"
+                className="text-slate-400 hover:text-white transition-colors"
                 aria-label="LinkedIn Profile"
               >
                 <Linkedin size={16} />
@@ -76,11 +51,23 @@ export const Footer: React.FC = () => {
             )}
             <a
               href={`mailto:${profile.email}`}
-              className="hover:text-white transition-colors"
+              className="text-slate-400 hover:text-white transition-colors"
               aria-label="Send Email"
             >
               <Mail size={16} />
             </a>
+
+            <span className="w-px h-3.5 bg-slate-800" aria-hidden="true" />
+
+            <button
+              type="button"
+              onClick={scrollToTop}
+              className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-slate-200 transition-colors cursor-pointer"
+              aria-label="Back to top"
+            >
+              <span>Back to top</span>
+              <ArrowUp size={13} />
+            </button>
           </div>
         </div>
       </div>

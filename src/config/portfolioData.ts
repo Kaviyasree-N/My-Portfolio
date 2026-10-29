@@ -55,6 +55,7 @@ export interface ExperienceItem {
   location: string;
   period: string;
   type: 'Open Source' | 'Community' | 'Internship';
+  description?: string;
   collaborationNotice?: string;
   bulletPoints: string[];
   tags: string[];
@@ -341,8 +342,27 @@ export const PORTFOLIO_DATA = {
     }
   ] as ProjectItem[],
 
-  // 4. Experience & Community (Order: 1. GirlScript GSSoC 2026, 2. GSX Chennai Chapter 2026 onwards)
+  // 4. Experience & Community (Order: 1. CITBIF Internship, 2. GirlScript GSSoC 2026, 3. GSX Chennai Chapter 2026 onwards)
   experiences: [
+    {
+      role: "Product Developer Intern",
+      organization: "CIT Business Incubation Forum (CITBIF), Chennai Institute of Technology",
+      location: "Chennai, Tamil Nadu, India",
+      period: "May–June 2026",
+      type: "Internship",
+      description:
+        "Worked as part of a team on the development of CITEVENT, a college event management system designed to support event administration, participant registration, and approval workflows.",
+      collaborationNotice:
+        "Collaborative internship experience focused on product planning, UI/UX prototyping, and full-stack development with peer collaboration.",
+      bulletPoints: [
+        "Contributed to the research, analysis, planning, and prototyping stages of the product.",
+        "Worked with React for the frontend, Django for the backend, and PostgreSQL for database management.",
+        "Explored UI/UX prototyping using Figma AI and Lovable.",
+        "Collaborated with a teammate on implementation, documentation, and Git-based version control.",
+        "Gained exposure to agile project workflows, task management, and product development."
+      ],
+      tags: ["React", "Django", "PostgreSQL", "Figma AI", "Lovable", "Git Collaboration", "Agile Workflows"]
+    },
     {
       role: "Open Source Contributor",
       organization: "GirlScript Summer of Code (GSSoC 2026)",
